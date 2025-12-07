@@ -60,10 +60,10 @@ def main():
         keys = pygame.key.get_pressed()
         scale = scale_factor if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT] else 1
 
-        if keys[pygame.K_LEFT]:   pan_x -= pan_speed * scale
-        if keys[pygame.K_RIGHT]:  pan_x += pan_speed * scale
-        if keys[pygame.K_UP]:     pan_y -= pan_speed * scale
-        if keys[pygame.K_DOWN]:   pan_y += pan_speed * scale
+        if keys[pygame.K_LEFT]:   pan_x += pan_speed * scale
+        if keys[pygame.K_RIGHT]:  pan_x -= pan_speed * scale
+        if keys[pygame.K_UP]:     pan_y += pan_speed * scale
+        if keys[pygame.K_DOWN]:   pan_y -= pan_speed * scale
         if keys[pygame.K_EQUALS]: zoom_level += zoom_speed * scale
         if keys[pygame.K_MINUS]:  zoom_level -= zoom_speed * scale
 

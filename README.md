@@ -7,23 +7,22 @@ This repo contains a simple python app to help you
 collimate your telescope.  When run, the app connects
 to a video streaming device, for example
 a "USB Streaming" supporting camera
-with a T-ring adapter attached, and displays it
-with a HUD reticle on top.
+with a T-ring adapter attached, on your computer and 
+displays it in a window with a HUD reticle on top.
 
-Use the scroll wheel on the mouse to zoom or dag the mouse to pan.
-The app works on the mac using the trackpad as well.  When using the mouse or
-trackpad, dagging will pan the video stream.  However using the keyboard the
-keys pans the reticle instead.
+Use the scroll wheel on the mouse to zoom or dag the mouse 
+to pan the video stream.
+The app also works on the mac using the trackpad.
 
 ## Application Keys
 
 Use the following keys to pan and zoom:
 
 ```
-LEFT:   move reticle left        
-RIGHT:  move reticle right       
-UP:     move reticle up 
-DOWN:   move reticle down
+LEFT:   move video stream left        
+RIGHT:  move video stream right       
+UP:     move video stream up 
+DOWN:   move video stream down
 EQUALS: zoom video stream in
 MINUS:  zoom video stream out
 SHIFT:  hold shift to pan or zoom faster
