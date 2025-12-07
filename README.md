@@ -3,7 +3,7 @@
 
 ## Collimation Tool
 
-This repo contains a simple python app to help you
+This repo contains a simple python app to help
 collimate your telescope.  When run, the app connects
 to a video streaming device, for example
 a "USB Streaming" supporting camera
