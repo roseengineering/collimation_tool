@@ -36,7 +36,7 @@ ESC:    quits app
 If you have uv installed you can either run the app
 using "sh collimate.py" or directly using "./collimate.py".
 uv will automatically install the proper python dependencies.
-Otherwise ensure both opencv-python, numpy, and
+Otherwise ensure opencv-python, numpy, and
 pygame are installed in your python environment before running.
 
 ## Command Line Usage
