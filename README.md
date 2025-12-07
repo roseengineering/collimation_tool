@@ -26,6 +26,9 @@ DOWN:   move video stream down
 EQUALS: zoom video stream in
 MINUS:  zoom video stream out
 SHIFT:  hold shift to pan or zoom faster
+R:      resets zoom to 1
+Q:      quits app
+ESC:    quits app
 ```
 
 ## Running the App
