@@ -4,8 +4,8 @@
 ## Collimation Tool
 
 This repo contains a simple python app to help
-collimate your telescope.  When run, the app connects
-to a video streaming device, for example
+collimate your telescope.  The app connects
+to your video streaming device, for example
 a "USB Streaming" supporting camera
 with a T-ring adapter attached, and 
 displays the feed in a window with a HUD reticle on top.
