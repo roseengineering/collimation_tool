@@ -16,10 +16,12 @@ def parse_args():
         formatter_class=formatter_class,
         description="collimation circle tool")
     parser.add_argument('--device', type=int, default=0, help='video device number')
+    parser.add_argument('--color', default='green', help='reticle color')
     return parser.parse_args()
 
 def main():
     args = parse_args()
+    color = args.color
     cap = cv2.VideoCapture(args.device)
     if not cap.isOpened():
         return
@@ -37,7 +39,6 @@ def main():
     win_w, win_h = 800, 600
     screen = pygame.display.set_mode((win_w, win_h), pygame.RESIZABLE)
     clock = pygame.time.Clock()
-    color = (0, 255, 0)
     pan_x = 0         # Offset from center X (pixels)
     pan_y = 0         # Offset from center Y (pixels)
     pan_speed = 1     # Speed of panning

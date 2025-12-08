@@ -42,13 +42,14 @@ pygame are installed in your python environment before running.
 ## Command Line Usage
 
 ```
-usage: collimation.py [-h] [--device DEVICE]
+usage: collimation.py [-h] [--device DEVICE] [--color COLOR]
 
 collimation circle tool
 
 options:
   -h, --help       show this help message and exit
   --device DEVICE  video device number (default: 0)
+  --color COLOR    reticle color (default: green)
 ```
 
 
