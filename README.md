@@ -3,16 +3,9 @@
 
 ## Collimation Tool
 
-This repo contains a simple python app to help
-collimate your telescope.  The app connects
-to your video streaming device, for example
-a "USB Streaming" supporting camera
-with a T-ring adapter attached, and 
-displays the feed in a window with a HUD reticle on top.
+This repo contains a simple python app to help collimate your telescope.  The app connects to your video streaming device, for example a "USB Streaming" supporting camera with a T-ring adapter attached, and displays the feed in a window with a HUD reticle on top.
 
-Use the scroll wheel on the mouse to zoom or drag the mouse 
-to pan the video stream.
-The app also works on the mac using the trackpad.
+Use the scroll wheel on the mouse to zoom or drag the mouse to pan the video stream.  The app also works on the mac using the trackpad.
 
 ## Application Keys
 
@@ -33,11 +26,7 @@ ESC:    quits app
 
 ## Running the App
 
-If you have uv installed you can either run the app
-using "sh collimate.py" or directly using "./collimate.py".
-uv will automatically install the proper python dependencies.
-Otherwise ensure opencv-python, numpy, and
-pygame are installed in your python environment before running.
+If you have [uv](https://docs.astral.sh/uv/) installed you can either run the app using "sh collimate.py" or directly using "./collimate.py".  uv will automatically install the proper python dependencies.  Otherwise ensure opencv-python, numpy, and pygame are installed in your python environment before running.
 
 ## Command Line Usage
 
