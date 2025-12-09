@@ -26,7 +26,7 @@ ESC:    quits app
 
 ## Running the App
 
-If you have [uv](https://docs.astral.sh/uv/) installed you can either run the app using "sh collimate.py" or directly using "./collimate.py".  uv will automatically install the proper python dependencies.  Otherwise ensure opencv-python, numpy, and pygame are installed in your python environment before running.
+If you have [uv](https://docs.astral.sh/uv/) installed you can either run the app using "sh collimate.py" or directly using "./collimate.py".  [uv](https://docs.astral.sh/uv/) will automatically install the proper python dependencies.  Otherwise ensure opencv-python, numpy, and pygame are installed in your python environment before running.
 
 ## Command Line Usage
 
