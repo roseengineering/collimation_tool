@@ -16,7 +16,7 @@ The app also works on the mac using the trackpad.
 
 ## Application Keys
 
-Use the following keys to pan and zoom:
+The following keys pan and zoom:
 
 ```
 LEFT:   move video stream left        
