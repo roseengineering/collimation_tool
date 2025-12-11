@@ -49,24 +49,24 @@ def main():
     zoom_level = 2.0  # 1.0 = 100%, 2.0 = 200%
 
     while running:
-        min_zoom = win_h / win_w * cam_w / cam_h
-        min_zoom = max(min_zoom, 1 / min_zoom)
-        zoom_level = max(zoom_level, min_zoom)
-
-        view_w = int(cam_w / zoom_level)
-        view_h = int(win_h / win_w * view_w)
-        view_w = min(view_w, cam_w)
-        view_h = min(view_h, cam_h)
-
+        scale = 1
         keys = pygame.key.get_pressed()
-        scale = scale_factor if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT] else 1
-
+        if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]: scale = scale_factor 
         if keys[pygame.K_LEFT]:   pan_x += pan_speed * scale
         if keys[pygame.K_RIGHT]:  pan_x -= pan_speed * scale
         if keys[pygame.K_UP]:     pan_y += pan_speed * scale
         if keys[pygame.K_DOWN]:   pan_y -= pan_speed * scale
         if keys[pygame.K_EQUALS]: zoom_level += zoom_speed * scale
         if keys[pygame.K_MINUS]:  zoom_level -= zoom_speed * scale
+
+        min_zoom = win_h / win_w * cam_w / cam_h
+        min_zoom = max(min_zoom, 1 / min_zoom)
+        zoom_level = max(zoom_level, min_zoom)
+        view_w = int(cam_w / zoom_level)
+        view_h = int(win_h / win_w * view_w)
+        view_w = min(view_w, cam_w)
+        view_h = min(view_h, cam_h)
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # X button on window
@@ -115,9 +115,11 @@ def main():
             view_x = (cam_x - (view_w // 2)) + int(pan_x)
             view_y = (cam_y - (view_h // 2)) + int(pan_y)
 
-            # keep view within cam image
+            # keep view and pan within cam image
             view_x = clamp(view_x, 0, cam_w - view_w)
             view_y = clamp(view_y, 0, cam_h - view_h)
+            pan_x = clamp(pan_x, (view_w // 2) - cam_x, cam_x - (view_w // 2))
+            pan_y = clamp(pan_y, (view_h // 2) - cam_y, cam_y - (view_h // 2))
 
             # crop subsurface
             roi_rect = pygame.Rect(view_x, view_y, view_w, view_h)
