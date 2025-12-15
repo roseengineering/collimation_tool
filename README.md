@@ -3,7 +3,7 @@
 
 ## Collimation Tool
 
-This repo contains a simple python app to help collimate your telescope.  The app connects to your video streaming device, for example a "USB Streaming" supporting camera with a T-ring adapter attached, and displays the feed in a window with a HUD reticle on top.
+This repo contains a simple python app to help collimate your telescope.  The app connects to your video streaming device, for example a "USB Streaming" supporting camera with a T-1.25" adapter attached, and displays the feed in a window with a HUD reticle on top.  
 
 Use the scroll wheel on the mouse to zoom or drag the mouse to pan the video stream.  The app also works on the mac using the trackpad.
 
@@ -40,5 +40,10 @@ options:
   --device DEVICE  video device number (default: 0)
   --color COLOR    reticle color (default: green)
 ```
+
+## Notes
+
+In the image, I inserted a reflector safety sticker, punched with a center hole, behind the adapter so I could see the center donut.  Changing the exposure setting on the camera will also bring it out.  
+
 
 
