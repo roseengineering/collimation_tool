@@ -19,6 +19,7 @@ DOWN:   move video stream down
 EQUALS: zoom video stream in
 MINUS:  zoom video stream out
 SHIFT:  hold shift to pan or zoom faster
+e/E:    increase or decrease exposure
 R:      resets zoom to 1
 Q:      quits app
 ESC:    quits app
@@ -31,7 +32,7 @@ If you have [uv](https://docs.astral.sh/uv/) installed you can either run the ap
 ## Command Line Usage
 
 ```
-usage: collimation.py [-h] [--device DEVICE] [--color COLOR]
+usage: collimation.py [-h] [--device DEVICE] [--color COLOR] [--manual]
 
 collimation circle tool
 
@@ -39,6 +40,7 @@ options:
   -h, --help       show this help message and exit
   --device DEVICE  video device number (default: 0)
   --color COLOR    reticle color (default: green)
+  --manual         manual exposure (default: False)
 ```
 
 ## Notes

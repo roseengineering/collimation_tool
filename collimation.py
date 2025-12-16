@@ -1,11 +1,11 @@
 #!/usr/bin/env -S uv run --with opencv-python,pygame,numpy
 "exec" "uv" "run" "--with" "opencv-python,pygame,numpy" "$0" "$@"
 
+import sys
+import argparse
 import cv2
 import pygame
-import argparse
 import numpy as np
-import sys
 
 def clamp(value, min_val, max_val):
     return max(min_val, min(value, max_val))
@@ -17,6 +17,7 @@ def parse_args():
         description="collimation circle tool")
     parser.add_argument('--device', type=int, default=0, help='video device number')
     parser.add_argument('--color', default='green', help='reticle color')
+    parser.add_argument('--manual', action='store_true', help='manual exposure')
     return parser.parse_args()
 
 def main():
@@ -24,7 +25,13 @@ def main():
     color = args.color
     cap = cv2.VideoCapture(args.device)
     if not cap.isOpened():
+        print('Cannot open camera')
         return
+
+    if args.manual:
+        cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 1) 
+        exposure_state = cap.get(cv2.CAP_PROP_AUTO_EXPOSURE)
+        exposure_value = cap.get(cv2.CAP_PROP_EXPOSURE)
 
     # Native Camera Resolution
     cam_w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -33,7 +40,7 @@ def main():
     cam_y = cam_h // 2
 
     pygame.init()
-    pygame.display.set_caption("Collimation Helper")
+    pygame.display.set_caption("Collimation Tool")
     
     # Window settings (Resizable)
     win_w, win_h = 800, 600
@@ -49,9 +56,16 @@ def main():
     zoom_level = 2.0  # 1.0 = 100%, 2.0 = 200%
 
     while running:
-        scale = 1
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]: scale = scale_factor 
+        shifted = keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]
+        scale = scale_factor if shifted else 1
+
+        if keys[pygame.K_e]:
+            if args.manual and not exposure_state:
+                exposure_value += 1 if shifted else -1
+                cap.set(cv2.CAP_PROP_EXPOSURE, exposure_value)
+                exposure_value = cap.get(cv2.CAP_PROP_EXPOSURE)
+
         if keys[pygame.K_LEFT]:   pan_x += pan_speed * scale
         if keys[pygame.K_RIGHT]:  pan_x -= pan_speed * scale
         if keys[pygame.K_UP]:     pan_y += pan_speed * scale
@@ -67,7 +81,6 @@ def main():
         view_w = min(view_w, cam_w)
         view_h = min(view_h, cam_h)
 
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # X button on window
                 running = False
@@ -75,10 +88,13 @@ def main():
             elif event.type == pygame.VIDEORESIZE:
                 zoom_level *= win_w / event.w
                 win_w, win_h = event.w, event.h
-                # screen = pygame.display.set_mode((win_w, win_h), pygame.RESIZABLE)
+                # screen = pygame.display.set_mode(
+                # (win_w, win_h), pygame.RESIZABLE)?
+
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE or event.key == pygame.K_q:
                     running = False
+
                 if event.key == pygame.K_r:
                     zoom_level = 1.0
                     pan_x = 0
@@ -87,9 +103,11 @@ def main():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:  # left mouse button
                     last_pos = event.pos
+
             elif event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1:  # left mouse button
                     last_pos = None
+
             elif event.type == pygame.MOUSEMOTION:
                 if last_pos:
                     pan_x += (last_pos[0] - event.pos[0]) / zoom_level
