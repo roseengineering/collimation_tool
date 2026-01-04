@@ -32,6 +32,8 @@ def main():
         cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 1) 
         exposure_state = cap.get(cv2.CAP_PROP_AUTO_EXPOSURE)
         exposure_value = cap.get(cv2.CAP_PROP_EXPOSURE)
+    else:
+        exposure_state = 0
 
     # Native Camera Resolution
     cam_w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -61,7 +63,7 @@ def main():
         scale = scale_factor if shifted else 1
 
         if keys[pygame.K_e]:
-            if args.manual and not exposure_state:
+            if exposure_state:
                 exposure_value += 1 if shifted else -1
                 cap.set(cv2.CAP_PROP_EXPOSURE, exposure_value)
                 exposure_value = cap.get(cv2.CAP_PROP_EXPOSURE)
@@ -149,8 +151,11 @@ def main():
             screen.blit(final_surface, (0, 0))
 
             # draw info text
+            text = f"Zoom: {zoom_level:.1f}x | Pan: {pan_x:.0f},{pan_y:.0f}"
+            if exposure_state:
+                text = f'{text} | Exposure: {exposure_value}'
             font = pygame.font.SysFont(None, 24)
-            img = font.render(f"Zoom: {zoom_level:.1f}x | Pan: {pan_x:.0f},{pan_y:.0f}", True, color)
+            img = font.render(text, True, color)
             screen.blit(img, (10, 10))
             
             # draw Reticle
